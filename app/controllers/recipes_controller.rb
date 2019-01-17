@@ -16,6 +16,7 @@ class RecipesController < ApplicationController
   # GET /recipes/new
   def new
     @recipe = current_user.recipes.new
+
   end
 
   # GET /recipes/1/edit
@@ -29,8 +30,8 @@ class RecipesController < ApplicationController
 
     respond_to do |format|
       if @recipe.save
-        format.html { redirect_to @recipe, notice: 'Recipe was successfully created.' }
-        format.json { render :show, status: :created, location: @recipe }
+        format.html { redirect_to new_instruction_path(recipe: @recipe.id), notice: 'Recipe was successfully created.' }
+        # format.json { render :show, status: :created, location: @recipe }
       else
         format.html { render :new }
         format.json { render json: @recipe.errors, status: :unprocessable_entity }
@@ -72,4 +73,5 @@ class RecipesController < ApplicationController
     def recipe_params
       params.fetch(:recipe, {}).permit(:title, :ingredients, :instructions)
     end
+
 end

@@ -1,0 +1,4 @@
+<%= form_with(model: @instruction, local: true) do |form| %>
+  <%= form.text_area :body %>
+  <%= form.submit "Add instruction" %>
+<% end %>
