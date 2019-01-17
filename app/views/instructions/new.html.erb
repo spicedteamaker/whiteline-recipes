@@ -1,6 +1,8 @@
-<% @addedInstructions.each do |i| %>
-  <%= i.body %>
-  <br>
+<% unless @addedInstructions.nil? %>
+  <% @addedInstructions.each do |i| %>
+    <%= i.body %>
+    <br>
+  <% end %>
 <% end %>
 
 <%= form_with(model: @instruction, local: true) do |form| %>
