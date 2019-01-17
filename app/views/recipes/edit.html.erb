@@ -2,5 +2,7 @@
 
 <%= render 'form', recipe: @recipe %>
 
+or <%= link_to "Delete Permanently", @recipe, method: :delete, data: {confirm: "Are you sure?"} %>
+
 <%= link_to 'Show', @recipe %> |
 <%= link_to 'Back', recipes_path %>
