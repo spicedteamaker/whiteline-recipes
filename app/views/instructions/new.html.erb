@@ -1,13 +1,9 @@
-<% unless @addedInstructions.nil? %>
-  <% @addedInstructions.each do |i| %>
-    <%= i.body %>
-    <br>
-  <% end %>
+<% @addedInstructions.each do |i| %>
+  <%= i.body %>
+  <%= link_to "Delete", [@recipe, i], method: :delete, data: {confirm: "Are you sure?"} %>
+  <br>
 <% end %>
-
-<%= form_with(model: @instruction, local: true) do |form| %>
+<%= form_with(model: @instruction, url: [@recipe, @instruction], local: true) do |form| %>
   <%= form.text_area :body %>
-  <%= @recipe.id %>
-  <%= hidden_field_tag(:recipe, @recipe.id) %>
   <%= form.submit "Add Instruction" %>
 <% end %>

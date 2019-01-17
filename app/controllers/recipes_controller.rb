@@ -30,7 +30,7 @@ class RecipesController < ApplicationController
 
     respond_to do |format|
       if @recipe.save
-        format.html { redirect_to new_instruction_path(recipe: @recipe.id), notice: 'Recipe was successfully created.' }
+        format.html { redirect_to new_recipe_instruction_path(recipe_id: @recipe.id), notice: 'Recipe was successfully created.' }
         # format.json { render :show, status: :created, location: @recipe }
       else
         format.html { render :new }
