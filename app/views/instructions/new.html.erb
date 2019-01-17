@@ -1,9 +1,14 @@
 <% @addedInstructions.each do |i| %>
   <%= i.body %>
+  <% if i.picture.attached? %>
+    <%= image_tag i.picture, size: "250x250" %>
+  <% end %>
   <%= link_to "Delete", [@recipe, i], method: :delete, data: {confirm: "Are you sure?"} %>
   <br>
 <% end %>
 <%= form_with(model: @instruction, url: [@recipe, @instruction], local: true) do |form| %>
   <%= form.text_area :body %>
+  <%= form.file_field :picture %>
+  <br>
   <%= form.submit "Add Instruction" %>
 <% end %>

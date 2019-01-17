@@ -49,6 +49,6 @@ class InstructionsController < ApplicationController
     @instruction = Instruction.find(params[:id])
   end
   def instruction_params
-      params.fetch(:instruction, {}).permit(:body)
+      params.fetch(:instruction, {}).permit(:body, :picture)
   end
 end
