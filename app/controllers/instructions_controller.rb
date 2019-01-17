@@ -5,11 +5,24 @@ class InstructionsController < ApplicationController
   end
 
   def new
-    @instruction = Recipe.find(params[:recipe]).instructions.new
+    @recipe = Recipe.find(params[:recipe])
+    @instruction = @recipe.instructions.new
+    @addedInstructions = @recipe.instructions
   end
 
   def create
+    @recipe = Recipe.find(params[:recipe])
+    @instruction = @recipe.instructions.new(instruction_params)
 
+    respond_to do |format|
+      if @instruction.save
+        format.html { redirect_to new_instruction_path(recipe: @recipe.id), notice: 'instruction was successfully created.' }
+        # format.json { render :show, status: :created, location: @recipe }
+      else
+        format.html { render :new }
+        format.json { render json: @recipe.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
   def edit
@@ -23,7 +36,7 @@ class InstructionsController < ApplicationController
   def destroy
   end
 
-  def recipe_params
-      params.fetch(:instruction, {}).permit(:body)
+  def instruction_params
+      params.fetch(:instruction, {}).permit(:body, :recipe)
   end
 end

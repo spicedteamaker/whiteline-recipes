@@ -1,4 +1,11 @@
+<% @addedInstructions.each do |i| %>
+  <%= i.body %>
+  <br>
+<% end %>
+
 <%= form_with(model: @instruction, local: true) do |form| %>
   <%= form.text_area :body %>
-  <%= form.submit "Add instruction" %>
+  <%= @recipe.id %>
+  <%= hidden_field_tag(:recipe, @recipe.id) %>
+  <%= form.submit "Add Instruction" %>
 <% end %>
