@@ -3,7 +3,7 @@
   Not happy with this? <%= link_to 'Edit...', edit_recipe_path(@recipe), class: "text-primary" %>
   <br>
   <br>
-  <%= "#{@recipe.title}" %>
+  <h1><%= "#{@recipe.title}" %></h1>
   <% unless @recipe.tags.nil? %>
     <div class="tags-text">
       <% @recipe.tags.each do |t| %>

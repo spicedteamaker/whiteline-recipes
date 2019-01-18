@@ -18,7 +18,9 @@
   <% end %>
   <%= form_with(model: @instruction, url: [@recipe, @instruction], local: true) do |form| %>
     <%= form.text_area :body, rows: "15", class: "form-control rounded-20", placeholder: "Instructions..." %>
+    <hr>
     <%= form.file_field :picture %>
+    <br>
     <br>
     <%= form.submit "Add Instruction" %>
   <% end %>
