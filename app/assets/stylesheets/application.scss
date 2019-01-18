@@ -13,3 +13,43 @@
  *= require_tree .
  *= require_self
  */
+
+
+ /* Whiteline's Preferred Colours */
+$pink: #eecfd4;
+$dark-blue: #58a4b0;
+$purple: #c490d1;
+$light-blue: #7cc6fe;
+$brown: #9f7e69;
+
+nav {
+  background-color: $pink;
+  color: black;
+}
+.recipe-box {
+  text-align: center;
+}
+
+.recipe-box a {
+  color: $light-blue;
+  margin: auto;
+}
+
+img {
+  border-style: solid;
+  border-color: $dark-blue;
+  border-radius: 10px;
+}
+
+a:hover {
+  background-color: transparent;
+}
+
+.single-instruction-area {
+  text-align: left;
+  border-style: solid;
+  border-color: $brown;
+  border-radius: 10px;
+  border-width: 2px;
+  margin-bottom: 10px;
+}

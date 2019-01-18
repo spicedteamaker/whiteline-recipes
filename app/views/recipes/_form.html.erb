@@ -11,8 +11,8 @@
     </div>
   <% end %>
 
-  <%= form.text_field :title %>
-  <%= form.text_area :ingredients %>
+  <%= form.text_field :title, class: "form-control", placeholder: "Title..." %>
+  <%= form.text_area :ingredients, rows: "15", class: "form-control rounded-20", placeholder: "Body..." %>
   <%= form.file_field :picture %>
 
   <div class="actions">

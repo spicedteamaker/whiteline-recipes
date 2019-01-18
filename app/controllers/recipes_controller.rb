@@ -11,6 +11,7 @@ class RecipesController < ApplicationController
   # GET /recipes/1.json
   def show
     @user = User.find(@recipe.user_id)
+    @instructions = @recipe.instructions
   end
 
   # GET /recipes/new
@@ -44,7 +45,7 @@ class RecipesController < ApplicationController
   def update
     respond_to do |format|
       if @recipe.update(recipe_params)
-        format.html { redirect_to @recipe, notice: 'Recipe was successfully updated.' }
+        format.html { redirect_to new_recipe_instruction_path(recipe_id: @recipe.id), notice: 'Recipe was successfully updated.' }
         format.json { render :show, status: :ok, location: @recipe }
       else
         format.html { render :edit }
