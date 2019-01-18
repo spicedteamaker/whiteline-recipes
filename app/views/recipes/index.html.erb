@@ -1,15 +1,8 @@
 <p id="notice"><%= notice %></p>
 <div class="container recipe-box">
-  <div class="row">
       <% @recipes.each do |recipe| %>
-        <div class="col-sm-6 col-md-3">
-          <h3><%= link_to "#{recipe.title}", recipe %></h3>
-          <% if recipe.picture.attached? %>
-            <%= image_tag recipe.picture.variant(resize: "250x250", quality: 50), class: "img-fluid" %>
-          <% end %>
-          <!--<%= link_to 'Edit', edit_recipe_path(recipe) %>-->
-        </div>
+        <h6><%= link_to recipe.title, recipe %></h6>
+        <br>
       <% end %>
       <br>
-  </div>
 </div>

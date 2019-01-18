@@ -2,6 +2,10 @@
   <h1>Editing <%= @recipe.title %></h1>
 
   <%= render 'form', recipe: @recipe %>
+  <% if @recipe.picture.attached? %>
+    <%= link_to "Delete Attached Picture Permanently", recipe_delete_picture_path, method: :delete, data: {confirm: "Are you sure?"}, class: "text-danger" %>
+    <br>
+  <% end %>
 
   <%= link_to "Delete Permanently", @recipe, method: :delete, data: {confirm: "Are you sure?"}, class: "text-danger" %> or
   <%= link_to 'Abort Edits', recipes_path, class: "text-primary" %>

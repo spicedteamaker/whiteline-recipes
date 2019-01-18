@@ -1,16 +1,25 @@
-<% @addedInstructions.each do |i| %>
-  <div class="single-instruction-area">
-    <%= simple_format(i.body) %>
-    <% if i.picture.attached? %>
-      <%= image_tag i.picture, size: "250x250" %>
-    <% end %>
-    <%= link_to "Delete", [@recipe, i], method: :delete, data: {confirm: "Are you sure?"} %>
+<div class="container text-center">
+  <%= link_to "Finished Editing", recipe_path(@recipe), class: "text-success" %>
+  <% @addedInstructions.each do |i| %>
+    <div class="container">
+    <div class="row single-instruction-area">
+      <div class="col-md">
+        <%= simple_format(i.body) %>
+      </div>
+      <% if i.picture.attached? %>
+        <div class="instruction-picture">
+          <%= image_tag i.picture.variant(resize: "250x250")%>
+        </div>
+      <% end %>
+      <%= link_to "Delete", [@recipe, i], method: :delete, data: {confirm: "Are you sure?"}, class: "text-danger" %>
+    </div>
+    <br>
   </div>
-  <br>
-<% end %>
-<%= form_with(model: @instruction, url: [@recipe, @instruction], local: true) do |form| %>
-  <%= form.text_area :body %>
-  <%= form.file_field :picture %>
-  <br>
-  <%= form.submit "Add Instruction" %>
-<% end %>
+  <% end %>
+  <%= form_with(model: @instruction, url: [@recipe, @instruction], local: true) do |form| %>
+    <%= form.text_area :body, rows: "15", class: "form-control rounded-20", placeholder: "Instructions..." %>
+    <%= form.file_field :picture %>
+    <br>
+    <%= form.submit "Add Instruction" %>
+  <% end %>
+</div>

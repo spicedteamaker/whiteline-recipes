@@ -1,10 +1,10 @@
 class RecipesController < ApplicationController
-  before_action :set_recipe, only: [:show, :edit, :update, :destroy]
+  before_action :set_recipe, only: [:show, :edit, :update, :destroy, :delete_picture]
 
   # GET /recipes
   # GET /recipes.json
   def index
-    @recipes = Recipe.all
+    @recipes = Recipe.all.order(:updated_at).reverse
   end
 
   # GET /recipes/1
@@ -62,6 +62,11 @@ class RecipesController < ApplicationController
       format.html { redirect_to recipes_url, notice: 'Recipe was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def delete_picture
+    @recipe.picture.purge_later
+    redirect_to edit_recipe_path(@recipe), notice: "Picture deleted"
   end
 
   private

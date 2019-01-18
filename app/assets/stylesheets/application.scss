@@ -16,6 +16,7 @@
 
 
  /* Whiteline's Preferred Colours */
+$dark-pink: #d58693;
 $pink: #eecfd4;
 $dark-blue: #58a4b0;
 $purple: #c490d1;
@@ -27,18 +28,13 @@ nav {
   color: black;
 }
 .recipe-box {
-  text-align: center;
+  text-align: left;
 }
 
 .recipe-box a {
-  color: $light-blue;
+  color: $dark-pink;
+  font-weight: bold;
   margin: auto;
-}
-
-img {
-  border-style: solid;
-  border-color: $dark-blue;
-  border-radius: 10px;
 }
 
 a:hover {
@@ -48,8 +44,16 @@ a:hover {
 .single-instruction-area {
   text-align: left;
   border-style: solid;
-  border-color: $brown;
-  border-radius: 10px;
-  border-width: 2px;
-  margin-bottom: 10px;
+  border-color: $pink;
+  border-radius: 5px;
+  border-width: 5px;
+  margin: 10px;
+}
+
+.instruction-text {
+  margin-top: 10px;
+}
+
+.instruction-picture {
+  margin: 10px;
 }

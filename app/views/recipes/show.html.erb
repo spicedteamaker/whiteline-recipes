@@ -1,17 +1,32 @@
 <p id="notice"><%= notice %></p>
 <div class="container text-center">
-  Not happy with this? <%= link_to 'Edit...', edit_recipe_path(@recipe) %> or <%= link_to "Delete Permanently", @recipe, method: :delete, data: {confirm: "Are you sure?"} %>
+  Not happy with this? <%= link_to 'Edit...', edit_recipe_path(@recipe), class: "text-primary" %>
   <br>
   <%= "#{@recipe.title} by #{@user.email}" %>
-  <%= image_tag @recipe.picture, class: "img-fluid" %>
+  <% if @recipe.picture.attached? %>
+    <%= image_tag @recipe.picture, class: "img-fluid" %>
+  <% end %>
   <div class="container">
     <h4> You will need: </h4>
     <%= simple_format(@recipe.ingredients) %>
     <hr>
+
+
     <h4> Instructions: </h4>
     <% @instructions.each do |i| %>
-      <div class="single-instruction-area">
-        <%= simple_format(i.body) %>
+      <div class="container">
+        <div class="row single-instruction-area">
+          <div class="col-md">
+            <div class="instruction-text">
+              <%= simple_format(i.body) %>
+            </div> 
+        </div>
+        <% if i.picture.attached? %>
+          <div class="instruction-picture">
+              <%= image_tag i.picture.variant(resize: "250x250")%>
+        </div>
+        <% end %>
+      </div>
       </div>
     <% end %>
   </div>
