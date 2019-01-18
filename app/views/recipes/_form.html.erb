@@ -15,6 +15,8 @@
   <hr>
   <h4> Instructions </h4>
   <%= form.text_area :ingredients, rows: "15", class: "form-control rounded-20", placeholder: "Body..." %>
+  <hr>
+  <%= form.text_field :tags, class: "form-control", placeholder: "breakfast;lunch;yum;..." %>
   <%= form.file_field :picture %>
 
   <div class="actions">

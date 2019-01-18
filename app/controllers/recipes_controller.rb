@@ -28,6 +28,7 @@ class RecipesController < ApplicationController
   # POST /recipes.json
   def create
     @recipe = current_user.recipes.new(recipe_params)
+    @recipe.tags = params.fetch(:recipe, {}).permit(:tags)["tags"].to_s.split(";")
 
     respond_to do |format|
       if @recipe.save
@@ -44,6 +45,7 @@ class RecipesController < ApplicationController
   # PATCH/PUT /recipes/1.json
   def update
     respond_to do |format|
+      @recipe.tags = params.fetch(:recipe, {}).permit(:tags)["tags"].to_s.split(";")
       if @recipe.update(recipe_params)
         format.html { redirect_to new_recipe_instruction_path(recipe_id: @recipe.id), notice: 'Recipe was successfully updated.' }
         format.json { render :show, status: :ok, location: @recipe }
@@ -70,6 +72,13 @@ class RecipesController < ApplicationController
   end
 
   private
+
+    def filter_tags(tagsString)
+      # so we expect tagsString to be something like:
+      # breakfast;lunch;wow;big gains;
+      tagsString.split(";")
+
+    end
     # Use callbacks to share common setup or constraints between actions.
     def set_recipe
       @recipe = Recipe.find(params[:id])

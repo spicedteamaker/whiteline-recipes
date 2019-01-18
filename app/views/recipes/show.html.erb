@@ -7,6 +7,16 @@
     <%= image_tag @recipe.picture, class: "img-fluid" %>
   <% end %>
   <div class="container">
+      <h4> Tags: </h4>
+      <div class="container tags-area">
+        <% unless @recipe.tags.nil? %>
+        <div class="tags-text">
+          <% @recipe.tags.each do |t| %>
+            <%= "#{t}; " %>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
     <h4> You will need: </h4>
     <%= simple_format(@recipe.ingredients) %>
     <hr>
@@ -19,7 +29,7 @@
           <div class="col-md">
             <div class="instruction-text">
               <%= simple_format(i.body) %>
-            </div> 
+            </div>
         </div>
         <% if i.picture.attached? %>
           <div class="instruction-picture">
