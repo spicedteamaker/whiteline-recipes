@@ -2,26 +2,22 @@
 <div class="container text-center">
   Not happy with this? <%= link_to 'Edit...', edit_recipe_path(@recipe), class: "text-primary" %>
   <br>
-  <%= "#{@recipe.title} by #{@user.email}" %>
+  <br>
+  <%= "#{@recipe.title}" %>
+  <% unless @recipe.tags.nil? %>
+    <div class="tags-text">
+      <% @recipe.tags.each do |t| %>
+        <%= link_to "##{t}", recipes_path(filtertag: t) %>
+      <% end %>
+    </div>
+  <% end %>
   <% if @recipe.picture.attached? %>
     <%= image_tag @recipe.picture, class: "img-fluid" %>
   <% end %>
   <div class="container">
-      <h4> Tags: </h4>
-      <div class="container tags-area">
-        <% unless @recipe.tags.nil? %>
-        <div class="tags-text">
-          <% @recipe.tags.each do |t| %>
-            <%= "#{t}; " %>
-          <% end %>
-        <% end %>
-      </div>
-    </div>
     <h4> You will need: </h4>
     <%= simple_format(@recipe.ingredients) %>
     <hr>
-
-
     <h4> Instructions: </h4>
     <% @instructions.each do |i| %>
       <div class="container">

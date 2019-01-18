@@ -65,6 +65,7 @@ a:hover {
   border-width: 5px;
 }
 
-.tags-text {
+.tags-text a {
+  color: $dark-pink;
   margin: 10px;
 }

@@ -1,7 +1,13 @@
 <p id="notice"><%= notice %></p>
 <div class="container recipe-box">
+  <%= link_to "Clear Tags", recipes_path %>
+  <br>
+  <% @tags.each do |t| %>
+    <%= link_to "##{t}", recipes_path(filtertag: t) %>
+  <% end %>
+  <hr>
       <% @recipes.each do |recipe| %>
-        <h6><%= link_to recipe.title, recipe %></h6>
+        <%= link_to recipe.title, recipe %>
         <br>
       <% end %>
       <br>

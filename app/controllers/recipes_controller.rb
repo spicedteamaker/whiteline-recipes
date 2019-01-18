@@ -5,6 +5,22 @@ class RecipesController < ApplicationController
   # GET /recipes.json
   def index
     @recipes = Recipe.all.order(:updated_at).reverse
+    filtered = filter_recipes_by_tag(params[:filtertag].to_s, @recipes)
+    @tags = []
+    @recipes.each do |r|
+      unless r.tags.nil?
+        r.tags.each do |t|
+          unless @tags.include? t
+            @tags << t
+          end
+        end
+      end
+    end
+    @tags.sort!
+    if !filtered.empty?
+      @recipes = filtered unless filtered.empty?
+      @recipes.reverse!
+    end
   end
 
   # GET /recipes/1
@@ -73,20 +89,32 @@ class RecipesController < ApplicationController
 
   private
 
-    def filter_tags(tagsString)
-      # so we expect tagsString to be something like:
-      # breakfast;lunch;wow;big gains;
-      tagsString.split(";")
+  def filter_recipes_by_tag(filtertag, recipes)
+    filtered = []
+    recipes.each do |r|
+      unless r.tags.nil?
+        if r.tags.include? filtertag
+          filtered << r
+        end
+      end
+    end
+    filtered
+  end
 
-    end
-    # Use callbacks to share common setup or constraints between actions.
-    def set_recipe
-      @recipe = Recipe.find(params[:id])
-    end
+  def filter_tags(tagsString)
+    # so we expect tagsString to be something like:
+    # breakfast;lunch;wow;big gains;
+    tagsString.split(";")
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def recipe_params
-      params.fetch(:recipe, {}).permit(:title, :ingredients, :instructions, :picture)
-    end
+  end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_recipe
+    @recipe = Recipe.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def recipe_params
+    params.fetch(:recipe, {}).permit(:title, :ingredients, :instructions, :picture)
+  end
 
 end
