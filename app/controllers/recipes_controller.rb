@@ -1,5 +1,6 @@
 class RecipesController < ApplicationController
   before_action :set_recipe, only: [:show, :edit, :update, :destroy, :delete_picture]
+  before_action :logged_in?, only: [:new, :edit, :create, :update, :destroy]
 
   # GET /recipes
   # GET /recipes.json

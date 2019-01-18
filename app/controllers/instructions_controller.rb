@@ -1,6 +1,7 @@
 class InstructionsController < ApplicationController
   before_action :set_instruction, only: [:show, :edit, :update, :destroy]
   before_action :set_recipe, only: [:new, :create, :destroy]
+  before_action :logged_in?, only: [:new, :create, :destroy]
   def show
 
   end
