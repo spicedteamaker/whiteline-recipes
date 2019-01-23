@@ -1,16 +1,20 @@
 <div class="container text-center">
-  <%= link_to "Finished Editing", recipe_path(@recipe), class: "text-success" %>
+  <%= link_to "Finished Editing", recipe_path(@recipe), class: "text-primary" %>
   <% @addedInstructions.each do |i| %>
     <div class="container">
     <div class="row single-instruction-area">
       <div class="col-md">
-        <%= simple_format(i.body) %>
+        <%= link_to "Edit...", edit_recipe_instruction_path(@recipe, i), class: "text-primary" %>
+        <div class="instruction-text">
+          <%= simple_format(i.body) %>
+        </div>
       </div>
       <% if i.picture.attached? %>
         <div class="instruction-picture">
           <%= image_tag i.picture.variant(resize: "250x250")%>
         </div>
       <% end %>
+
       <%= link_to "Delete", [@recipe, i], method: :delete, data: {confirm: "Are you sure?"}, class: "text-danger" %>
     </div>
     <br>

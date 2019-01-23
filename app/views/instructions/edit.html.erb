@@ -1,0 +1,16 @@
+<div class="container text-center">
+  <%= form_with(model: @instruction, url: [@recipe, @instruction], local: true) do |form| %>
+    <%= form.text_area :body, rows: "15", class: "form-control rounded-20", placeholder: "Instructions..." %>
+    <hr>
+    <% if @instruction.picture.attached? %>
+      <%= link_to "Delete Attached Picture Permanently", recipe_instructions_delete_picture_path, method: :delete, data: {confirm: "Are you sure?"}, class: "text-danger"%>
+      <br>
+      <br>
+    <% end %>
+    <%= form.file_field :picture %>
+    <br>
+    <br>
+    <%= form.submit "Commit Instruction" %>
+    <%= link_to "Abort Edits", new_recipe_instruction_path(recipe_id: @recipe.id), class: "text-primary" %>
+  <% end %>
+</div>
