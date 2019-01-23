@@ -1,9 +1,12 @@
 <p id="notice"><%= notice %></p>
 <div class="container text-center">
+  <% if user_signed_in? %>
   Not happy with this? <%= link_to 'Edit...', edit_recipe_path(@recipe), class: "text-primary" %>
+  <% end %>
   <br>
   <br>
   <h1><%= "#{@recipe.title}" %></h1>
+  <p><%= "published by #{@recipe.user.username}" %></p>
   <% unless @recipe.tags.nil? %>
     <div class="tags-text">
       <% @recipe.tags.each do |t| %>
