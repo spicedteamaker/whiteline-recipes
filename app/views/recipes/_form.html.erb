@@ -16,7 +16,7 @@
   <h4> Ingredients </h4>
   <%= form.text_area :ingredients, rows: "15", class: "form-control rounded-20", placeholder: "2 tbsp butter\n5 grams coffee\n2 1/2 cups sugar" %>
   <hr>
-  <%= form.text_field :tags, class: "form-control", placeholder: "breakfast;lunch;yum;..." %>
+  <%= form.text_field :tags, class: "form-control", placeholder: "#breakfast#lunch#yum! ...", value: @tags %>
   <%= form.file_field :picture %>
 
   <div class="actions">

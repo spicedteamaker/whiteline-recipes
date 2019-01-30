@@ -39,6 +39,7 @@ class RecipesController < ApplicationController
 
   # GET /recipes/1/edit
   def edit
+    @tags = tagify(@recipe.tags)
   end
 
   # POST /recipes
@@ -62,7 +63,7 @@ class RecipesController < ApplicationController
   # PATCH/PUT /recipes/1.json
   def update
     respond_to do |format|
-      @recipe.tags = params.fetch(:recipe, {}).permit(:tags)["tags"].to_s.split(";")
+      @recipe.tags = makeTags(params.fetch(:recipe, {}).permit(:tags)["tags"].to_s)
       if @recipe.update(recipe_params)
         format.html { redirect_to new_recipe_instruction_path(recipe_id: @recipe.id), notice: 'Recipe was successfully updated.' }
         format.json { render :show, status: :ok, location: @recipe }
@@ -89,6 +90,22 @@ class RecipesController < ApplicationController
   end
 
   private
+
+  def tagify(tagArray)
+    # converts to string with hashtags
+    tagString = tagArray * "#"
+    firstHash = "#"
+    unless tagString.empty?
+      return firstHash + tagString
+    end
+    tagString
+  end
+
+  def makeTags(tagString)
+    a = tagString.split("#")
+    # we drop the first element, because splitting it adds an empty char at [0]
+    a.drop(1)
+  end
 
   def filter_recipes_by_tag(filtertag, recipes)
     filtered = []
